@@ -52,6 +52,14 @@ Several auxiliary functions are provided:
     AD    ⍝ quaternion from axis and angle in degrees (dyadic, monadic for z)
     E     ⍝ quaternion from Euler angles in radians (dyadic, monadic for xyz)
     ED    ⍝ quaternion from Euler angle in degrees (dyadic, monadic for xyz)
+    _     ⍝ apply to scalar, vector or quaternion, along last axis
+    R     ⍝ rotate quaternion or vector, given quaternion (dyadic)
+    R2    ⍝ rotate 2D vector, given angle in radians (dyadic)
+    R2D   ⍝ rotate 2D vector, given angle in degrees (dyadic)
+    R3    ⍝ rotate 3D vector, given angle in radians and axis (dyadic)
+    R3D   ⍝ rotate 3D vector, given angle in degrees and axis (dyadic)
+    ∆     ⍝ angle difference in radians (dyadic, monadic for rotation angle)
+    ∆D    ⍝ angle difference in degrees (dyadic, monadic for rotation angle)
     RND   ⍝ generate random quaternions (dyadic, monadic for unitary)
 
 The function `Test` (niladic) runs several tests.
