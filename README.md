@@ -3,39 +3,23 @@ H
 
 The namespace H provides functions for quaternion multiplication in Dyalog APL.
 
-Any array with four elements along its last axis with conformant elements can
-be considered as a quaternion. Two quaternions can be multiplied together if
-their elements conform.
+Any array of rank 1 and length 4 with conformant elements can be considered a
+quaternion. Two quaternions can be multiplied together if their elements, which
+can be nested arrays, conform.
 
 For example, all these arrays are valid quaternions:
 
-        a←?4⍴0            ⍝ simple quaternion with scalar elements
-        b←?2 3 4⍴0        ⍝ array of quaternions with scalar elements
-        c←?4⍴⊂2 3⍴0       ⍝ quaternion with array elements
-        d←?2 3 4⍴⊂2 3⍴0   ⍝ array of quaternions with array elements
+        a←?4⍴0         ⍝ quaternion with scalar elements
+        b←?4⍴⊂3⍴0      ⍝ quaternion with list elements
+        c←?4⍴⊂2 3⍴0    ⍝ quaternion with matrix elements
+        d←0 w@0 2⊢c    ⍝ quaternoin with mixed matrix and scalar elements
 
-And all of these quaternions can be multiplied between them:
+And all of these multiplications are valid:
 
-        (⍴¨∘.H.P⍨a b c d)((⍴∘⊃)¨∘.H.P⍨a b c d)
-    ┌─────────────────────────┬─────────────────┐
-    │┌─────┬─────┬─────┬─────┐│┌───┬───┬───┬───┐│
-    ││4    │2 3 4│4    │2 3 4│││   │   │2 3│2 3││
-    │├─────┼─────┼─────┼─────┤│├───┼───┼───┼───┤│
-    ││2 3 4│2 3 4│2 3 4│2 3 4│││   │   │2 3│2 3││
-    │├─────┼─────┼─────┼─────┤│├───┼───┼───┼───┤│
-    ││4    │2 3 4│4    │2 3 4│││2 3│2 3│2 3│2 3││
-    │├─────┼─────┼─────┼─────┤│├───┼───┼───┼───┤│
-    ││2 3 4│2 3 4│2 3 4│2 3 4│││2 3│2 3│2 3│2 3││
-    │└─────┴─────┴─────┴─────┘│└───┴───┴───┴───┘│
-    └─────────────────────────┴─────────────────┘
-
-It is also possible to combine scalar and array elements in a quaternion:
-
-        e←0(?0)@0 2⊢c
-        ⍴∘⊃¨(a c,3⍴⊂e)H.P¨(3⍴⊂e),a c 
-    ┌─────┬─────┬─────┬─────┬─────┐
-    │3 2 4│3 2 4│3 2 4│3 2 4│3 2 4│
-    └─────┴─────┴─────┴─────┴─────┘
+        (⊂a)H.P¨a b c d
+        (⊂b)H.P¨a b      ⍝ elements of b and c/d do not conform
+        (⊂c)H.P¨a   c d
+        (⊂d)H.P¨a   c d
 
 In addition to the quaternion multiplication function `H.P`, an operator `H._P`
 is provided, which can be used to apply different products. Eg:
