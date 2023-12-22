@@ -33,7 +33,7 @@ is provided, which can be used to apply different products. Eg:
     │2 2│2 2│2 2│2 2│
     └───┴───┴───┴───┘
 
-The function `H.P` is equivalent to `H.(×P)`, but slightly faster.
+The function `H.P` is equivalent to `H.(×_P)`, but slightly faster.
 
 Variables `uijk` refer to the base components of quaternions (see Hamilton 1843):
 
